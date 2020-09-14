@@ -1,7 +1,12 @@
 import React from "react";
 import './index.css'
+import { Redirect } from 'react-router-dom'
 
-import logo from './images/timgg.png'
+import logo from '../../assets/images/timgg.png'
+import {reqLogin} from '../../api/index'
+import {message} from "antd";
+import memoryutils from "../../utils/memoryutils";
+import storageUtils from "../../utils/storageUtils";
 
 import { Form, Input, Button,Checkbox } from 'antd';
 
@@ -19,12 +24,28 @@ import {
 
 export default class Login extends React.Component {
 
-    onFinish = values => {
-        console.log('Received values of form: ', values);
-        console.log(values);
+     onFinish = async values => {
+        const {username, password} = values
+        const response = await reqLogin(username,password)
+        const result = response.data
+         console.log(result)
+        if(result.status === 0){
+            const user = result.data
+            memoryutils.user = user
+            storageUtils.saveUser(user)
+            message.success('登录成功')
+            this.props.history.replace('/')
+        }else {
+            message.error(result.msg)
+        }
+
     };
 
     render() {
+        const user = memoryutils.user
+        if (user && user._id){
+            return <Redirect to='/' />
+        }
         return (
             <div className='login'>
                 <header className='login_header'>
