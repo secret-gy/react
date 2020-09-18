@@ -30,19 +30,17 @@ export default class Admin extends React.Component{
                 <Layout>
                     <HeaderNav style={{backgroundColor:'white',padding:0}} >heard</HeaderNav>
                     {/*<header>header</header>*/}
-                    <Content >
-                        <BrowserRouter>
-                            <Switch>
-                                <Route path='/home' component={Home}/>
-                                <Route path='/category' component={Category}/>
-                                <Route path='/product' component={Product}/>
-                                <Route path='/user' component={User}/>
-                                <Route path='/bar' component={Bar}/>
-                                <Route path='/line' component={Line}/>
-                                <Route path='/pie' component={Pie}/>
-                                <Redirect to='/'/>
-                            </Switch>
-                        </BrowserRouter>
+                    <Content style={{margin: 20, backgroundColor: '#fff'}}>
+                        <Switch>
+                            <Route path='/home' component={Home}/>
+                            <Route path="/category" component={Category}/>
+                            <Route path='/product' component={Product}/>
+                            <Route path='/user' component={User}/>
+                            <Route path='/bar' component={Bar}/>
+                            <Route path='/line' component={Line}/>
+                            <Route path='/pie' component={Pie}/>
+                            <Redirect to='/home' component={Home}/>
+                        </Switch>
                     </Content>
                     <Footer style={{textAlign:'center', color:'#cccccc'}}>推荐使用谷歌浏览器</Footer>
                 </Layout>
